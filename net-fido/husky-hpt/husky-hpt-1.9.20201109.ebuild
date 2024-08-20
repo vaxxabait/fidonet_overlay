@@ -13,7 +13,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-inherit cmake-multilib
+inherit cmake-multilib optfeature
 
 DESCRIPTION="FTN husky ${HUSKY_MODULE} library"
 HOMEPAGE="https://huskyproject.github.io/"
@@ -29,23 +29,32 @@ DEPEND="
 	>=net-fido/husky-areafix-1.9.20201103
 	>=net-fido/husky-hptzip-1.9.20190108
 "
+
 RDEPEND="${DEPEND}"
-BDEPEND="
-	sys-apps/texinfo
-"
 
 S="${WORKDIR}/${HUSKY_MODULE}-${PV}"
 
-DOCS="${S}/CREDITS ${S}/ChangeLog ${S}/HISTORY ${S}/README.md ${S}/TODO ${S}/misc/filefix.hlp"
+DOCS="${S}/BUGS ${S}/CREDITS ${S}/ChangeLog ${S}/HISTORY ${S}/README.md ${S}/TODO"
+
+PATCHES=(
+	"${FILESDIR}"/${P}-hptlink_no_global.patch
+)
 
 multilib_src_install() {
 	cmake_src_install
 	insinto /etc/ftn
-	newins ${S}/misc/config config.example.${HUSKY_MODULE}
-	newins ${S}/misc/fileareas fileareas.example.${HUSKY_MODULE}
+	newins ${S}/config/config config.example.${HUSKY_MODULE}
+	newins ${S}/config/areas areas.example.${HUSKY_MODULE}
+	newins ${S}/config/links links.example.${HUSKY_MODULE}
+	newins ${S}/config/packer packer.example.${HUSKY_MODULE}
+	newins ${S}/config/route route.example.${HUSKY_MODULE}
 	
 	doman ${S}/man/*.*
 
 	makeinfo ${S}/doc/${HUSKY_MODULE}.texi -o ${S}/${HUSKY_MODULE}.info
 	doinfo ${S}/${HUSKY_MODULE}.info
+}
+
+pkg_postinst() {
+       optfeature "Perl support" dev-lang/perl
 }
