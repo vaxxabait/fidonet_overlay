@@ -20,9 +20,7 @@
 #    FAQ
 #      http://binkd.grumbler.org/binkdfaq.shtml
 
-EAPI=7
-
-inherit eutils
+EAPI=8
 
 DESCRIPTION="Binkd daemon for ftn over ip"
 HOMEPAGE="http://www.corbina.net/~maloff/binkd/"
@@ -35,8 +33,7 @@ IUSE="aso bwlim +bzip2 doc ntlm perl proxy +zlib"
 DEPEND="bzip2? ( >=app-arch/bzip2-1.0.6 ) zlib? ( >=sys-libs/zlib-1.2.3-r1 ) perl? ( dev-lang/perl )"
 RDEPEND="${DEPEND}"
 
-#S=${WORKDIR}/${P}
-S=${WORKDIR}/binkd-1.1
+S=${WORKDIR}/${P}
 
 src_configure() {
 	# we make the configure work
