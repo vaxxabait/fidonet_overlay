@@ -1,7 +1,0 @@
-acct-group/fuglu 0: System group: fuglu
-acct-group/wforce 0: Group for net-analyzer/weakforced
-acct-user/fuglu 0: User for fuglu
-acct-user/wforce 0: User for net-analyzer/weakforced
-mail-filter/spamassassin 4.0.0-r2: An extensible mail filter which can identify and tag spam
-net-analyzer/weakforced 2.8.0: Anti-Abuse for servers at authentication time
-virtual/spamassassin-meta 0-r1 1-r1: Virtual for optional spamassassin perl modules
